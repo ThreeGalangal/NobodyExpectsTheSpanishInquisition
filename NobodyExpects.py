@@ -47,8 +47,13 @@ def reply_to_comment(subreddit_comment):
 			# reddit rate limit exceeded
 			# wait 1s and process again
 			print('waiting')
-			time.sleep(10)
-			reply_to_comment(subreddit_comment)
+			count = 0
+			while count < 10:
+				time.sleep(10)
+				reply_to_comment(subreddit_comment)
+				count += 1
+			print('Reddit Timeout')
+			sys.exit(1)
 	except Exception as e:
 		print('Failed to reply to comment', e)
 	else:
