@@ -42,11 +42,12 @@ def search_comment(comment):
 def reply_to_comment(subreddit_comment):
 	try:
 		subreddit_comment.reply("Nobody Expects the Spanish Inquisition")
+		print('Replied!', subreddit_comment.id)
 	except praw.exceptions.APIException:
 			# reddit rate limit exceeded
 			# wait 1s and process again
-			print('Waiting')
-			time.sleep(1)
+			print('waiting')
+			time.sleep(10)
 			reply_to_comment(subreddit_comment)
 	except Exception as e:
 		print('Failed to reply to comment', e)
